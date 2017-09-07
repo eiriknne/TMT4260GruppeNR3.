@@ -1,15 +1,15 @@
 %% *Project nr. 1.*
-% _Groupe 3. Tobias*Eirik^2_
+% _Groupe 3. Tobias and Eirik^2_
 %
-% |Abstract:| 
-% 
+% **
 %
-%% *Substitutional-self diffusion, derive analytical solution*
+%% *Substitutional-self diffusion derive analytical solution*
 %
 % $$C(x,t)=\frac{C_1+C_2}{2}-\frac{C_1+C_2}{2}\cdot erf \big( \frac{x}{2\sqrt{Dt}} \big)$$ 
 %
 
 %% *Substitutional-self diffusion, Anlytical solution*
+%
 
 clear all
 close all
