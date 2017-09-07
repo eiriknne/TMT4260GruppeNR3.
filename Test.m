@@ -16,7 +16,7 @@
 disp('Helo word')
 disp('test branch')
 
-
+prøver å gjøre en pull-request fra her..
 
 JHVH
 IHBJKHB
