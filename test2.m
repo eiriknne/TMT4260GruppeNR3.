@@ -1,4 +1,0 @@
-helo worl
-lklk
-lsdksldklsdklsd
-lklklØÆlk
