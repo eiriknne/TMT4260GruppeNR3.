@@ -6,6 +6,8 @@
 %
 %% *Substitutional-self diffusion, derive analytical solution*
 %
+% https://link.springer.com/content/pdf/bbm%3A978-1-4020-7860-6%2F1.pdf
+%
 % $$C(x,t)=\frac{C_1+C_2}{2}-\frac{C_1+C_2}{2}\cdot erf \big( \frac{x}{2\sqrt{Dt}} \big)$$ 
 %
 
@@ -14,19 +16,21 @@
 clear all
 close all
 
-T = ; %[K]
-D0_Ni = 10^-5; % ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. tabel 2.2
-D0_Cu = ???;
+T = 1273;   %[K]
+R = 8.1345; % ?
 
-Q_Ni = ;
-Q_Cu = ;
+D0_Ni = 190*10^-3; % [m^2/s] 
+D0_Cu = 31*10^-3;  % [m^2/s] 
+
+Q_Ni = 200.3*1000;  % [j/mol]
+Q_Cu =  279.7*1000; % [j/mol]
 
 % Equation for  diffusion:
-D_Ni = 
-D_C  =
+D_Ni = D0_Ni*exp(-Q_Ni/(R*T)); % enhet 
+D_Cu  = D0_Cu*exp(-Q_Ni/(R*T)); % enhet
 
-C1 = 1;
-C2 = 0;
+C1 = 1; % Initial cond. 
+C2 = 0; % Initial cond. 
 
 % Analytical solution of ficks law:
 funCxt = @(x,t,D) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
@@ -34,7 +38,7 @@ funCxt = @(x,t,D) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
 t = 0;    % [s]
 dt = 1000;  % [s]
 C = [];     % [quantity m^3] composition
-x = linspace(-1,1,50); % [mm] position
+x = linspace(-1,1,1000)*10^-3; % [m] position
 
 i = 0;
 
@@ -45,8 +49,7 @@ i = i +1;
             D = D_Ni;
         else
             D = D_Cu;
-        end
-        
+        end  
         C(i,j) = funCxt(x(j),t(i),D); 
     end 
 t(i+1) = t(i) + dt;
