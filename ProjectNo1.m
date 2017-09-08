@@ -14,13 +14,15 @@
 clear all
 close all
 
-D = 10^-5; % ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. tabel 2.2
+D_Ni = 10^-5; % ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. tabel 2.2
+D_Cu = ???;
+
 C1 = 1;
 C2 = 0;
 
 % Analytical solution of ficks law:
-funCxt = @(x,t) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
-%vi tester en endring
+funCxt = @(x,t,D) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
+%vi tester en endring. 
 
 t = 0;    % [s]
 dt = 1000;  % [s]
@@ -32,7 +34,11 @@ i = 0;
 while t < 30*60*60 % [s] run for 30 hours
 i = i +1;  
 	for j = 1:length(x)
-        C(i,j) = funCxt(x(j),t(i)); 
+        if x(j) > 0
+            D = D_Ni;
+        else
+            D = D_Cu;
+        C(i,j) = funCxt(x(j),t(i),D); 
     end 
 t(i+1) = t(i) + dt;
 end
