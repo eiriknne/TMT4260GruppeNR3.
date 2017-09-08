@@ -20,6 +20,7 @@ C2 = 0;
 
 % Analytical solution of ficks law:
 funCxt = @(x,t) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
+%vi tester en endring
 
 t = 0;    % [s]
 dt = 1000;  % [s]
