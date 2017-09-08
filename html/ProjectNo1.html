@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Project nr. 1.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-09-07"><meta name="DC.source" content="ProjectNo1.m"><style type="text/css">
+      --><title>Project nr. 1.</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-09-08"><meta name="DC.source" content="ProjectNo1.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,19 +66,32 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><b>Project nr. 1.</b></h1><!--introduction--><p><i>Groupe 3. Tobias and Eirik^2</i></p><p><tt>Abstract</tt></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1"><b>Substitutional-self diffusion, derive analytical solution</b></a></li><li><a href="#2"><b>Substitutional-self diffusion, Anlytical solution</b></a></li><li><a href="#4"><b>Substitutional-self diffusion, Nu merical solution</b></a></li></ul></div><h2 id="1"><b>Substitutional-self diffusion, derive analytical solution</b></h2><p><img src="ProjectNo1_eq11670280207464172082.png" alt="$$C(x,t)=\frac{C_1+C_2}{2}-\frac{C_1+C_2}{2}\cdot erf \big( \frac{x}{2\sqrt{Dt}} \big)$$" style="width:206px;height:26px;"></p><h2 id="2"><b>Substitutional-self diffusion, Anlytical solution</b></h2><pre class="codeinput">clear <span class="string">all</span>
+  </style></head><body><div class="content"><h1><b>Project nr. 1.</b></h1><!--introduction--><p><i>Groupe 3. Tobias*Eirik^2</i></p><p><tt>Abstract:</tt></p><pre class="codeoutput error">Error using dbstatus
+Error: File: C:\Users\fyrst\Documents\GitHub\TMT4260GruppeNR3\ProjectNo1.m Line: 17 Column: 5
+Expression or statement is incomplete or incorrect.
+</pre><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1"><b>Substitutional-self diffusion, derive analytical solution</b></a></li><li><a href="#2"><b>Substitutional-self diffusion, Anlytical solution</b></a></li><li><a href="#4"><b>Substitutional-self diffusion, Numerical solution</b></a></li></ul></div><h2><b>Substitutional-self diffusion, derive analytical solution</b><a name="1"></a></h2><p><img src="ProjectNo1_eq11670280207464172082.png" alt="$$C(x,t)=\frac{C_1+C_2}{2}-\frac{C_1+C_2}{2}\cdot erf \big( \frac{x}{2\sqrt{Dt}} \big)$$" style="width:329px;height:41px;"></p><h2><b>Substitutional-self diffusion, Anlytical solution</b><a name="2"></a></h2><pre class="codeinput">clear <span class="string">all</span>
 close <span class="string">all</span>
 
-D = 10^-5; <span class="comment">% ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. tabel 2.2</span>
+T = ; <span class="comment">%[K]</span>
+D0_Ni = 10^-5; <span class="comment">% ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. tabel 2.2</span>
+D0_Cu = ???;
+
+Q_Ni = ;
+Q_Cu = ;
+
+<span class="comment">% Equation for  diffusion:</span>
+D_Ni =
+D_C  =
+
 C1 = 1;
 C2 = 0;
 
 <span class="comment">% Analytical solution of ficks law:</span>
-funCxt = @(x,t) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
+funCxt = @(x,t,D) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
 
 t = 0;    <span class="comment">% [s]</span>
 dt = 1000;  <span class="comment">% [s]</span>
-C = [];     <span class="comment">% [quantety m^3] composition</span>
+C = [];     <span class="comment">% [quantity m^3] composition</span>
 x = linspace(-1,1,50); <span class="comment">% [mm] position</span>
 
 i = 0;
@@ -86,7 +99,13 @@ i = 0;
 <span class="keyword">while</span> t &lt; 30*60*60 <span class="comment">% [s] run for 30 hours</span>
 i = i +1;
 	<span class="keyword">for</span> j = 1:length(x)
-        C(i,j) = funCxt(x(j),t(i));
+        <span class="keyword">if</span> x(j) &gt; 0
+            D = D_Ni;
+        <span class="keyword">else</span>
+            D = D_Cu;
+        <span class="keyword">end</span>
+
+        C(i,j) = funCxt(x(j),t(i),D);
     <span class="keyword">end</span>
 t(i+1) = t(i) + dt;
 <span class="keyword">end</span>
@@ -100,15 +119,15 @@ j = 1;
     hold <span class="string">on</span>
 <span class="keyword">end</span>
 
-title(<span class="string">'Consentrationprofile in bar'</span>)
+title(<span class="string">'Concentrationprofile in bar'</span>)
 xlabel(<span class="string">'x [mm] ?? blir det riktig med mm???'</span>)
 legend(legends)
-</pre><img vspace="5" hspace="5" src="ProjectNo1_01.png" style="width:560px;height:420px;" alt=""> <pre>Vi kan se at profilen er symetrisk om midtpunktet av baren.. blablabla</pre><h2 id="4"><b>Substitutional-self diffusion, Nu merical solution</b></h2><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+</pre><pre>Vi kan se at profilen er symmetrisk om midtpunktet av baren.. blablabla</pre><h2><b>Substitutional-self diffusion, Numerical solution</b><a name="4"></a></h2><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% *Project nr. 1.*
-% _Groupe 3. Tobias and Eirik^2_
+% _Groupe 3. Tobias*Eirik^2_
 %
-% |Abstract| 
+% |Abstract:| 
 % 
 %
 %% *Substitutional-self diffusion, derive analytical solution*
@@ -117,21 +136,30 @@ legend(legends)
 %
 
 %% *Substitutional-self diffusion, Anlytical solution*
-%
 
 clear all
 close all
 
-D = 10^-5; % ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. tabel 2.2
+T = ; %[K]
+D0_Ni = 10^-5; % ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. tabel 2.2
+D0_Cu = ???;
+
+Q_Ni = ;
+Q_Cu = ;
+
+% Equation for  diffusion:
+D_Ni = 
+D_C  =
+
 C1 = 1;
 C2 = 0;
 
 % Analytical solution of ficks law:
-funCxt = @(x,t) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
+funCxt = @(x,t,D) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
 
 t = 0;    % [s]
 dt = 1000;  % [s]
-C = [];     % [quantety m^3] composition
+C = [];     % [quantity m^3] composition
 x = linspace(-1,1,50); % [mm] position
 
 i = 0;
@@ -139,7 +167,13 @@ i = 0;
 while t < 30*60*60 % [s] run for 30 hours
 i = i +1;  
 	for j = 1:length(x)
-        C(i,j) = funCxt(x(j),t(i)); 
+        if x(j) > 0
+            D = D_Ni;
+        else
+            D = D_Cu;
+        end
+        
+        C(i,j) = funCxt(x(j),t(i),D); 
     end 
 t(i+1) = t(i) + dt;
 end
@@ -153,13 +187,13 @@ for i = floor(linspace(1,(length(t)-1),5))
     hold on
 end
 
-title('Consentrationprofile in bar')
+title('Concentrationprofile in bar')
 xlabel('x [mm] ?? blir det riktig med mm???')
 legend(legends)
 
 %%
-%  Vi kan se at profilen er symetrisk om midtpunktet av baren.. blablabla
+%  Vi kan se at profilen er symmetrisk om midtpunktet av baren.. blablabla
 
-%% *Substitutional-self diffusion, Nu merical solution*
+%% *Substitutional-self diffusion, Numerical solution*
 ##### SOURCE END #####
 --></body></html>
