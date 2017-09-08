@@ -1,5 +1,5 @@
 %% *Project nr. 1.*
-% _Groupe 3. Tobias*Eirik*Eirik_
+% _Groupe 3. Tobias*Eirik*EirikA_
 %
 % |Abstract:| 
 % 
