@@ -14,19 +14,28 @@
 clear all
 close all
 
+<<<<<<< HEAD
 D_Ni = 10^-5; % ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. tabel 2.2
 D_Cu = ???;
 
+=======
+D = 10^-5; % ref: D. Porter, K Easterling, M. Sherif. Phase Transformations in Metal and Alloys. Third edition. table 2.2
+>>>>>>> 0583d2532ab2bb1fc9dfd88410b5677b5eab506a
 C1 = 1;
 C2 = 0;
 
 % Analytical solution of ficks law:
+<<<<<<< HEAD
 funCxt = @(x,t,D) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
 %vi tester en endring. 
+=======
+funCxt = @(x,t) (C1 + C2)/2 - ((C1 - C2)/2) * erf(x/(D*t));
+
+>>>>>>> 0583d2532ab2bb1fc9dfd88410b5677b5eab506a
 
 t = 0;    % [s]
 dt = 1000;  % [s]
-C = [];     % [quantety m^3] composition
+C = [];     % [quantity m^3] composition
 x = linspace(-1,1,50); % [mm] position
 
 i = 0;
@@ -52,11 +61,11 @@ for i = floor(linspace(1,(length(t)-1),5))
     hold on
 end
 
-title('Consentrationprofile in bar')
+title('Concentrationprofile in bar')
 xlabel('x [mm] ?? blir det riktig med mm???')
 legend(legends)
 
 %%
-%  Vi kan se at profilen er symetrisk om midtpunktet av baren.. blablabla
+%  Vi kan se at profilen er symmetrisk om midtpunktet av baren.. blablabla
 
-%% *Substitutional-self diffusion, Nu merical solution*
+%% *Substitutional-self diffusion, Numerical solution*
